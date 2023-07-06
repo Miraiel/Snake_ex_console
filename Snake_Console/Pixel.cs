@@ -9,8 +9,8 @@ namespace Snake_Console
 {
     public struct Pixel
     {
-        private const char PixelChar = '▓';
-        public Pixel(int x, int y, ConsoleColor color, int pixelSize = 3)
+        private const char PixelChar = '▓'; //задаем отрисовку
+        public Pixel(int x, int y, ConsoleColor color, int pixelSize = 3) //инициализация координат
         {
             X = x;
             Y = y;
@@ -27,20 +27,21 @@ namespace Snake_Console
 
         public void Draw()  //метод отрисовки пикселя
         {
-            Console.ForegroundColor = Color;
+            Console.ForegroundColor = Color;    //добавляем цвет пикселя к курсору в консоли
 
+            //цикл для отрисовки пикселя 3х3
             for (int x = 0;x<PixelSize; x++)
             {
                 for(int y = 0;y<PixelSize; y++)
                 {
-                    Console.SetCursorPosition(X*PixelSize+ x, Y*PixelSize+y);
+                    Console.SetCursorPosition(X*PixelSize+ x, Y*PixelSize+y); //выставляем курсор на позицию х,у и делаем отступ
                     Console.Write(PixelChar);
                 }
             }
 
         }
 
-        public void Clear()  //метод очистки пикселя
+        public void Clear()  //метод очистки пикселя идентичен отрисовке, вместо отрисовки ставим пробел
         {
             for (int x = 0; x < PixelSize; x++)
             {

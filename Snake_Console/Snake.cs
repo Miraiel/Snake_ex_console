@@ -5,34 +5,36 @@ namespace Snake_Console
 {
     public class Snake
     {
-        private readonly ConsoleColor headColor;
-        private readonly ConsoleColor bodyColor;
+        private readonly ConsoleColor headColor;    //цвет головы
+        private readonly ConsoleColor bodyColor;    //цвет тела
 
         public Snake(int initialX, int initialY, 
             ConsoleColor headColor,
             ConsoleColor bodyColor, 
-            int bodyLength = 3)
+            int bodyLength = 3)                     //конструктор змеи
         {
-            this.headColor = headColor;
+            this.headColor = headColor;             //цвета
             this.bodyColor = bodyColor;
 
-            Head = new Pixel(initialX, initialY, headColor);
+            Head = new Pixel(initialX, initialY, headColor);    //инициализация головы
             
-            for(int i = bodyLength; i>=0; i--)
+            for(int i = bodyLength; i>=0; i--)      //добавляем пиксели начиная с хвоста
             {
-                Body.Enqueue(new Pixel(Head.X - i - 1, initialY, bodyColor));
+                Body.Enqueue(new Pixel(Head.X - i - 1, initialY, bodyColor));   //Enqeue добавляют элименты в очередь
             }
 
-            Draw();
+            Draw(); //отрисовка
         }
 
-        public Pixel Head { get; private set; }
+        public Pixel Head { get; private set; } //добавляем пиксель головы
 
-        public Queue<Pixel> Body { get; } = new Queue<Pixel>();
+        public Queue<Pixel> Body { get; } = new Queue<Pixel>(); //добавляем очередь тела
 
         public void Move(Direction direction, bool eat = false)
         {
             Clear();
+
+            //работа метода: очищаем экран, добавляем пиксель в тело на месте головы, удаляем пиксель из очереди, а точнее из хвоста и бегаем в зависимости от направления
 
             Body.Enqueue(new Pixel(Head.X, Head.Y, bodyColor));
 
@@ -51,7 +53,7 @@ namespace Snake_Console
 
         }
 
-        public void Draw()
+        public void Draw()  //добавление змеи на экран
         {
             Head.Draw();
             foreach(Pixel pixel in Body)
@@ -60,7 +62,7 @@ namespace Snake_Console
             }
         }
 
-        public void Clear()
+        public void Clear() //очистка змеи
         {
             Head.Clear();
             foreach (Pixel pixel in Body)
